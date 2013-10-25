@@ -1,0 +1,15 @@
+@(weatherDataList: List[WeatherData])
+
+@main("Weather test") {
+
+    <h3>Temperature for next days</h3>
+    @if(weatherDataList.isEmpty()) {
+        No weather information!
+    }
+    @for(wd <- weatherDataList) {
+        <div>
+            <span>@wd.date</span>
+            <span>@wd.temperature</span>
+        </div>
+    }
+}
