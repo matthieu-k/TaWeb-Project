@@ -17,7 +17,7 @@ public class WeatherForecast {
 		wd = new ArrayList<WeatherData>();
 	}
 
-	public void getTemperatureByLatLongOnDate(double Lat, double Long, String date) {
+	public void getWeatherByLatLongOnDate(double Lat, double Long, String date) {
 		String jsonStr;
 		try {
 			jsonStr = Core.readUrl("http://api.openweathermap.org/data/2.5/forecast?lat=" + Lat + "&lon=" + Long + "&units=metric&cnt=14");
@@ -25,9 +25,17 @@ public class WeatherForecast {
 			JsonNode actualObj = mapper.readTree(jsonStr);
 			JsonNode results = actualObj.get("list");
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String icon = null, temp = null, description = null;
 			for (JsonNode element: results) {
 				if(formatter.parse(date).before(formatter.parse(element.get("dt_txt").toString().replace('"', ' ').trim()))) {
-					wd.add(new WeatherData(formatter.parse(element.get("dt_txt").toString().replace('"', ' ').trim()), element.get("main").get("temp").toString().substring(0,2)));
+					JsonNode weatherNode = element.get("weather");
+					for (JsonNode weatherNodeElement: weatherNode) {
+						icon = weatherNodeElement.get("icon").toString().replace('"', ' ').trim();
+						description = weatherNodeElement.get("description").toString().replace('"', ' ').trim();
+					}
+					temp = element.get("main").get("temp").toString().substring(0, 2);
+					temp = (temp.charAt(1) == '.') ? temp.substring(0, 1) : temp ;
+					wd.add(new WeatherData(formatter.parse(element.get("dt_txt").toString().replace('"', ' ').trim()), temp, icon, description));
 				}
 			}
 		} catch (Exception e) {

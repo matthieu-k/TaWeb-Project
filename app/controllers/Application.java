@@ -12,7 +12,7 @@ public class Application extends Controller {
 
     public static Result weather() {
     	WeatherForecast wf = new WeatherForecast();
-    	wf.getTemperatureByLatLongOnDate(43.61, 3.87, "2013-10-25 12:00:00");
+    	wf.getWeatherByLatLongOnDate(43.61, 3.87, "2013-10-31 12:00:00");
     	return ok(weather.render(wf.wd));
     }
 }
