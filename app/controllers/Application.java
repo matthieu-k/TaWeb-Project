@@ -1,18 +1,37 @@
 package controllers;
 
 import models.WeatherForecast;
-import play.mvc.*;
-import views.html.*;
+import play.data.DynamicForm;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
+import views.html.flights;
+import views.html.weather;
 
 public class Application extends Controller {
-
+	
     public static Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok(
+        			index.render()
+        		);
     }
-
+    
+    public static Result flights() {
+    	DynamicForm dynamicForm = Form.form().bindFromRequest();
+        String iataCode = dynamicForm.get("iataCode");
+        String arrivalDateTime = dynamicForm.get("arrivalDateTime");
+        
+    	return ok(
+    				flights.render(iataCode, arrivalDateTime)
+    			);
+    }
+    
     public static Result weather() {
     	WeatherForecast wf = new WeatherForecast();
     	wf.getWeatherByLatLongOnDate(43.61, 3.87, "2013-10-31 12:00:00");
-    	return ok(weather.render(wf.wd));
+    	return ok(
+    				weather.render(wf.wd)
+    			);
     }
 }

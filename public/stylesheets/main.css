@@ -1,0 +1,9 @@
+#airport-date-form label {
+	display : inline-block;
+	width : 150px;
+}
+
+#airport-date-form #iataCode {
+	width : 400px;
+}
+

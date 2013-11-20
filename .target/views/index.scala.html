@@ -1,7 +1,17 @@
-@(message: String)
+@main("TaWeb Project") {
 
-@main("Welcome to Play") {
-
-    @play20.welcome(message, style = "Java")
-
+	<h1>TaWeb Project</h1>
+	
+	<form id="airport-date-form" method="post" action="@routes.Application.flights()">
+		<label for="iataCode">Destination : </label>
+		<select id="iataCode" name="iataCode"></select><br/>
+		
+		<label for="arrivalDateTime">Arrival date : </label>
+		<input id="arrivalDateTime" type="text" name="arrivalDateTime" placeholder="dd/mm/yyyy hh:mm"/><br/>
+		
+		<input type="submit" />
+	</form>
+	
+	<script src="/assets/javascripts/airports.js">
+	</script>
 }
