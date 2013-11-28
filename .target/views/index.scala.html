@@ -1,8 +1,9 @@
 @main("TaWeb Project") {
 
+    <div id="index">
 	<h1>TaWeb Project</h1>
 	
-	<form id="airport-date-form" method="post" action="@routes.Application.flights()">
+	<form id="airport-date-form" method="post" action="@routes.Application.results()">
 		<label for="iataCode">Country : </label>
 		<select id="country" name="country"></select><br/>
 		
@@ -18,4 +19,6 @@
 	
 	<script src="/assets/javascripts/countries.js"></script>
 	<script src="/assets/javascripts/airports.js"></script>
+	
+	</div>
 }

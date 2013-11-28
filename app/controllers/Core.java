@@ -1,8 +1,18 @@
 package controllers;
 
+import play.*;
+
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.net.URL;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 
 public class Core {
 	public static String readUrl(String urlString) throws Exception {
@@ -21,5 +31,27 @@ public class Core {
 	        if (reader != null)
 	            reader.close();
 	    }
+	}
+	
+	public static String findCityNameByIATACode(String IATACode) {
+		String jsonStr = null;
+		String cityName = null;
+		try {
+			jsonStr = Files.toString(new File(Play.application().resource("public/json/city_airport_codes.json").toURI()), Charsets.UTF_8);
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode actualObj = mapper.readTree(jsonStr);
+			for (JsonNode jsonNode : actualObj) {
+				if (jsonNode.get("iata_code").textValue().equals(IATACode)) {
+					cityName = jsonNode.get("city").textValue();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cityName;
 	}
 }

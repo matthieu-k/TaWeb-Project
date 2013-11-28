@@ -2,8 +2,8 @@ package models;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -11,13 +11,8 @@ import controllers.Core;
 
 public class WeatherForecast {
 
-	public List<WeatherData> wd;
-	
-	public WeatherForecast() {
-		wd = new ArrayList<WeatherData>();
-	}
-
-	public void getWeatherByLatLongOnDate(double Lat, double Long, String date) {
+	public static List<WeatherData> getWeatherByLatLongOnDate(double Lat, double Long, Date ArrivalDate) {
+		List<WeatherData> wd = new ArrayList<WeatherData>();
 		String jsonStr;
 		try {
 			jsonStr = Core.readUrl("http://api.openweathermap.org/data/2.5/forecast?lat=" + Lat + "&lon=" + Long + "&units=metric&cnt=14");
@@ -25,21 +20,25 @@ public class WeatherForecast {
 			JsonNode actualObj = mapper.readTree(jsonStr);
 			JsonNode results = actualObj.get("list");
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String icon = null, temp = null, description = null;
+			String icon = null, description = null;
+			int temperature = 0;
+			Date weatherDate = null;
 			for (JsonNode element: results) {
-				if(formatter.parse(date).before(formatter.parse(element.get("dt_txt").toString().replace('"', ' ').trim()))) {
+				weatherDate = formatter.parse(element.get("dt_txt").textValue());
+				if(ArrivalDate.before(weatherDate)) {
 					JsonNode weatherNode = element.get("weather");
 					for (JsonNode weatherNodeElement: weatherNode) {
-						icon = weatherNodeElement.get("icon").toString().replace('"', ' ').trim();
-						description = weatherNodeElement.get("description").toString().replace('"', ' ').trim();
+						icon = weatherNodeElement.get("icon").textValue();
+						description = weatherNodeElement.get("description").textValue();
 					}
-					temp = element.get("main").get("temp").toString().substring(0, 2);
-					temp = (temp.charAt(1) == '.') ? temp.substring(0, 1) : temp ;
-					wd.add(new WeatherData(formatter.parse(element.get("dt_txt").toString().replace('"', ' ').trim()), temp, icon, description));
+					temperature = (int) Math.round(Double.parseDouble(element.get("main").get("temp").toString()));
+					wd.add(new WeatherData(weatherDate, temperature, icon, description));
 				}
 			}
+			return wd;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 }
