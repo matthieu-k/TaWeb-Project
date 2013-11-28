@@ -1,0 +1,32 @@
+@(iataCode : String, arrivalDateTime : Date, weatherDataList: List[WeatherData])
+
+@main("TaWeb Project") {
+
+    <div id="results">
+    <h1>TaWeb Project</h1>
+    <h2>You picked @iataCode on @arrivalDateTime.date.format("dd MMMM yyyy") at @arrivalDateTime.date.format("hh:mm") </h2>
+    
+    <h3>Weather upon your arrival and next days</h3>
+    @if(weatherDataList.isEmpty()) {
+        No weather information!
+    } else {
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Temperature</th>
+                <th>Description</th>
+                <th>Icon</th>
+            </tr>
+            @for(wd <- weatherDataList) {
+            <tr>
+                <td>@wd.date.format("dd/MM/yyyy hh:mm")</td>
+                <td>@wd.temperature &deg;C</td>
+                <td>@wd.description</td>
+                <td><img src="http://openweathermap.org/img/w/@{wd.icon}.png" alt="@wd.description"></td>
+            </tr>
+           }
+        </table>
+    }
+
+    </div>
+}
