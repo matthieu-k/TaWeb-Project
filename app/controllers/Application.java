@@ -39,13 +39,13 @@ public class Application extends Controller {
         Date ArrivalDate = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(arrivalDateTimeStr);
         // LOAD JSON FILE TO FIND CITY NAME
         iataCode = "MPL"; // FOR TESTING PUPROSES
-        String cityName = Core.findCityNameByIATACode(iataCode);
+        String cityAndCountryName = Core.findCityAndCountryByIATACode(iataCode);
 
         // GET WEATHER INFORMATION
         List<WeatherData> weatherData = WeatherForecast.getWeatherByLatLongOnDate(43.61, 3.87, ArrivalDate);
 
     	return ok(
-    			results.render(cityName, ArrivalDate, weatherData)
+    			results.render(cityAndCountryName, ArrivalDate, weatherData)
     			);
     }
 }

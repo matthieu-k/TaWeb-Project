@@ -33,9 +33,9 @@ public class Core {
 	    }
 	}
 	
-	public static String findCityNameByIATACode(String IATACode) {
+	public static String findCityAndCountryByIATACode(String IATACode) {
 		String jsonStr = null;
-		String cityName = null;
+		String cityName = null, countryName = null;
 		try {
 			jsonStr = Files.toString(new File(Play.application().resource("public/json/city_airport_codes.json").toURI()), Charsets.UTF_8);
 			ObjectMapper mapper = new ObjectMapper();
@@ -43,6 +43,7 @@ public class Core {
 			for (JsonNode jsonNode : actualObj) {
 				if (jsonNode.get("iata_code").textValue().equals(IATACode)) {
 					cityName = jsonNode.get("city").textValue();
+					countryName = jsonNode.get("country").textValue();
 				}
 			}
 		} catch (IOException e) {
@@ -52,6 +53,6 @@ public class Core {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return cityName;
+		return cityName.concat(", " + countryName);
 	}
 }
