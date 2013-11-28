@@ -3,7 +3,6 @@
 	width : 150px;
 }
 
-#airport-date-form #iataCode {
+#airport-date-form #iataCode, #airport-date-form #country {
 	width : 400px;
 }
-

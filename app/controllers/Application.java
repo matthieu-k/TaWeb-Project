@@ -1,20 +1,32 @@
 package controllers;
 
+import models.AirportService;
 import models.WeatherForecast;
+
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
+
 import views.html.flights;
+import views.html.index;
 import views.html.weather;
+import views.html.airportInformationByCountry;
 
 public class Application extends Controller {
 	
     public static Result index() {
         return ok(
         			index.render()
-        		);
+    			);
+    }
+    
+    public static Result GetAirportInformationByCountry(String country) {
+    	return ok(
+    				airportInformationByCountry.render(
+    							AirportService.GetAirportInformationByCountry(country)
+    						)
+				);
     }
     
     public static Result flights() {
