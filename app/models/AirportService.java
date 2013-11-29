@@ -1,11 +1,21 @@
 package models;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+
+import play.Play;
 import controllers.Core;
 
 public class AirportService {
@@ -14,6 +24,17 @@ public class AirportService {
 			"http://www.webservicex.net/airport.asmx/GetAirportInformationByCountry?country=";
 
 	public static String GetAirportInformationByCountry(String country) {
+		// cache
+		File file = null;
+		try {
+			file = new File(Play.application().path() + "/public/cache/json/" + country.replace(" ", "-").toLowerCase() +".json");
+			if (!file.createNewFile()){
+					// Return cached json
+					return Files.toString(file, Charsets.UTF_8);
+				}
+	    	} catch (IOException e) {
+		      e.printStackTrace();
+		}
 		String rawXML = "";
 		String JSONResponse = "";
 		
@@ -51,6 +72,15 @@ public class AirportService {
 			++arrayIndex;
 		}
 		JSONResponse += "]";
+		
+		// Create cache file
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			writer.write(JSONResponse);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return JSONResponse;
 	}

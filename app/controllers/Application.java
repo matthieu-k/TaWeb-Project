@@ -7,7 +7,6 @@ import java.util.List;
 import models.AirportService;
 import models.WeatherData;
 import models.WeatherForecast;
-import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
