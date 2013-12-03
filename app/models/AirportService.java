@@ -16,7 +16,6 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
 import play.Play;
-import controllers.Core;
 
 public class AirportService {
 	

@@ -4,9 +4,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import models.AirportService;
+import models.Core;
 import models.WeatherData;
 import models.WeatherForecast;
+import models.city.City;
+import models.city.CityParser;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -36,15 +40,14 @@ public class Application extends Controller {
         String iataCode = dynamicForm.get("iataCode");
         String arrivalDateTimeStr = dynamicForm.get("arrivalDateTime");
         Date ArrivalDate = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(arrivalDateTimeStr);
-        // LOAD JSON FILE TO FIND CITY NAME
-        iataCode = "MPL"; // FOR TESTING PUPROSES
-        String cityAndCountryName = Core.findCityAndCountryByIATACode(iataCode);
 
+        // GETTING CITY DATA
+        System.out.println(iataCode);
+        City city = CityParser.getCityInfoByIataCode(iataCode);
+        
         // GET WEATHER INFORMATION
         List<WeatherData> weatherData = WeatherForecast.getWeatherByLatLongOnDate(43.61, 3.87, ArrivalDate);
 
-    	return ok(
-    			results.render(cityAndCountryName, ArrivalDate, weatherData)
-    			);
+    	return ok(results.render(city, ArrivalDate, weatherData));
     }
 }
