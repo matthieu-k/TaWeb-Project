@@ -1,5 +1,7 @@
 package models.query;
 
+import java.util.StringTokenizer;
+
 import models.city.City;
 
 import com.hp.hpl.jena.query.QueryExecution;
@@ -22,7 +24,7 @@ public class QueryRunner
 	public static boolean exists(String queryString, String cityName)
 	{
 		String query = String.format(queryString, cityName);
-		System.out.println(query);
+		//System.out.println(query);
 		QueryExecution qexec = QueryExecutionFactory.sparqlService(SERVICE, query);
 		
 		return qexec.execAsk();
@@ -33,7 +35,7 @@ public class QueryRunner
 		City city = new City();
 		
 		String query = String.format(queryString, cityName);
-		System.out.println(query);
+		//System.out.println(query);
 		
 		QueryExecution qexec = QueryExecutionFactory.sparqlService(SERVICE, query);
 		ResultSet results = qexec.execSelect() ;
@@ -66,7 +68,12 @@ public class QueryRunner
 		    city.setLogitude(cityLong);
 		    city.setPopulationTotal(cityPopulationTotal);
 		    city.setCountry(countryName);
-		    city.setCountry(currencyCode);
+		    // Remove additional information
+		    if(currencyCode.indexOf(",") >= 0) {
+				StringTokenizer st = new StringTokenizer(currencyCode, ",");
+				currencyCode = st.nextToken();
+			}
+		    city.setcurrencyCode(currencyCode);
 		}
 		
 		return  city;

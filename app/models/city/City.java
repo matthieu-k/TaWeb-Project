@@ -8,6 +8,7 @@ public class City
 	private double latitude;
 	private double logitude; //geo:lat
 	private int populationTotal; // dbpedia-owl:populationTotal
+	private String currencyCode;
 	//dbpprop:currencyCode
 	
 	public City() 
@@ -18,6 +19,7 @@ public class City
 		this.latitude = 0.0;
 		this.logitude = 0.0;
 		this.populationTotal = 0;
+		this.currencyCode = new String();
 	}
 
 	public String getCountry() {
@@ -66,5 +68,13 @@ public class City
 
 	public void setPopulationTotal(String populationTotal) {
 		this.populationTotal = Integer.parseInt(populationTotal);
+	}
+	
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+
+	public void setcurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
 	}
 }

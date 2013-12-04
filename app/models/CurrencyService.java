@@ -1,39 +1,32 @@
 package models;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Parser;
+import java.net.URL;
+import java.util.List;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.Namespace;
+import org.jdom2.input.SAXBuilder;
 
 public class CurrencyService {
-
-	public static void getCurrency(String currency) {
-		String xmlStr = "";
-        try {
-        	xmlStr = Core.readUrl("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
-        	Document doc = Jsoup.parse(xmlStr, "", Parser.xmlParser());
-    		Element cube = doc.getElementById("Cube");
-    		System.out.println(cube.toString());
-        } catch (Exception e) {
-		e.printStackTrace();
+	public static String getCurrency(String currencyCode) {
+		String rate = "";
+		try {
+            SAXBuilder sxb = new SAXBuilder();
+            URL url = new URL("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
+            Document document = sxb.build(url);
+            Element racine = document.getRootElement();
+            Namespace ns = Namespace.getNamespace("http://www.ecb.int/vocabulary/2002-08-01/eurofxref");
+            Element cube = racine.getChild("Cube", ns);
+            Element cube2 = cube.getChild("Cube", ns);
+            List<Element> cube3 = cube2.getChildren("Cube", ns);
+            for (Element element : cube3) {
+                if(element.getAttributeValue("currency").equals(currencyCode)) {
+                    rate = element.getAttributeValue("rate");
+                }
+            }
+            return rate;
+        } catch (Exception ex) {
+        	return null;
         }
 	}
 }
-//    		for (Element c : cube3) {
-//    			c.ge
-//    		}
-    		
-//            Namespace ns = Namespace.getNamespace("http://www.ecb.int/vocabulary/2002-08-01/eurofxref");
-//            
-//            
-//            Element cube = racine.getChild("Cube", ns);
-//            
-//            Element cube2 = cube.getChild("Cube", ns);
-//            List<Element> cube3 = cube2.getChildren("Cube", ns);
-//            for (Element element : cube3) {
-//                if(element.getAttributeValue("currency").equals(currencyCode)) {
-//                    rate = Double.parseDouble(element.getAttributeValue("rate"));
-//                }
-//            }
-//            return rate * amount;
-

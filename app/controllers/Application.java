@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import models.Core;
+import models.CurrencyService;
 import models.WeatherData;
 import models.WeatherForecast;
 import models.city.City;
@@ -36,16 +37,25 @@ public class Application extends Controller
     	DynamicForm dynamicForm = Form.form().bindFromRequest();
         
     	String destination = dynamicForm.get("destinationValue");
-        String arrivalDateTimeStr = dynamicForm.get("arrivalDateTime");
-        Date ArrivalDate = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(arrivalDateTimeStr);
+        String arrivalDateStr = dynamicForm.get("arrivalDate");
+        String arrivalTimeStr = dynamicForm.get("arrivalTime");
+        Date ArrivalDate;
+        if(arrivalTimeStr.trim().isEmpty()) {
+        	ArrivalDate = new SimpleDateFormat("dd/MM/yyyy").parse(arrivalDateStr);
+        }
+        else {
+        	ArrivalDate = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(arrivalDateStr + " " + arrivalTimeStr);
+        }
 
         // GET CITY DATA
-        System.out.println(destination);
-        City city = CityParser.parse("Montpellier");
+        City city = CityParser.parse(destination);
         
         // GET WEATHER INFORMATION
         List<WeatherData> weatherData = WeatherForecast.getWeatherByLatLongOnDate(city.getLatitude(),city.getLongitude(), ArrivalDate);
         
-    	return ok(results.render(city, ArrivalDate, weatherData));
+        // GET CURRENCY INFORMATION
+        String currency = CurrencyService.getCurrency(city.getCurrencyCode());
+        
+    	return ok(results.render(city, ArrivalDate, weatherData, currency));
     }
 }

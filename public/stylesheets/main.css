@@ -1,39 +1,59 @@
 body {
-	font: 13px "Trebuchet MS",Helvetica,Jamrul,sans-serif;
+    font: 13px "Trebuchet MS",Helvetica,Jamrul,sans-serif;
+    background: #fff;
 }
 h1 {
-	font-size: 26px;
+    font-size: 26px;
+    padding: 10px 0 5px;
+}
+h2 {
+	font-size: 20px;
 	padding: 10px 0 5px;
+	font-weight: normal;
+}
+h2 strong {
+	font-size: 24px
+}
+h3 {
+	font-size: 18px;
+	font-weight: normal;
 }
 p {
-	padding: 4px 0;
+    padding: 4px 0;
 }
 header {
-	height: 150px;
+    height: 150px;
 }
 .center {
-	text-align: center;
+    text-align: center;
 }
 #wrapper {
-	margin: 0 auto;
-	width: 960px;
+    margin: 0 auto;
+    width: 960px;
+}
+#index {
+    width: 734px;
+    margin: 0 auto;
 }
 #destination-date-form p {
-	margin: 15px 0;
+    margin: 15px 0;
 }
 #destination-date-form label {
-	display : inline-block;
-	width : 150px;
+    display : inline-block;
+    width : 150px;
 }
 
 #destination-date-form #destination, #destination-date-form #date {
-	width : 450px;
+    width : 492px;
+}
+#destination-date-form p span {
+    margin-right: 50px;
 }
 #loader {
-	display: none;
-	width: 16px;
-	height: 16px;
-	margin: 0 0 0 5px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0 0 0 5px;
     background-image: url(../images/ui-anim_basic_16x16.gif);
     background-position: right center;
     background-repeat: no-repeat;

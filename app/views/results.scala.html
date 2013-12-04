@@ -1,14 +1,13 @@
-@(city : models.city.City, arrivalDateTime : Date, weatherDataList: List[WeatherData])
+@(city : models.city.City, arrivalDate : Date, weatherDataList: List[WeatherData], rate : String)
 
 @main("TaWeb Project") {
 
     <div id="results">
-    <h1>TaWeb Project</h1>
-    <h2>You picked @city.getName() on @arrivalDateTime.date.format("dd MMMM yyyy") at @arrivalDateTime.date.format("hh:mm") </h2>
-    <br />
-    <h2>Abstract</h2>
+    <h2>You picked <strong>@city.getName(), @city.getCountry</strong> on <strong>@arrivalDate.date.format("dd MMMM yyyy")</strong></h2>
+    <h3>City description</h3>
     <p>@city.getOverview()</p>
-    
+    <h3>Currency</h3>
+    <p>@city.getCurrencyCode<br>Rate: @rate</p>
     <br />
     <h3>Weather upon your arrival and next days</h3>
     @if(weatherDataList.isEmpty()) {

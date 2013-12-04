@@ -1,14 +1,18 @@
 $(document).ready(function () {
 	if ($("#index").length) {
-		$('#arrivalDateTime').datetimepicker({
+		$('#arrivalDate').datepicker({
 			dateFormat: "dd/mm/yy"
+		});
+		
+		$('#arrivalTime').timepicker({
+			dateFormat: "hh:mm"
 		});
 		
 		$("#destination" ).autocomplete({
 			 source: function( request, response ) {
 			 $.ajax({
 				 beforeSend: function() {
-					 $("#loader").css('display','inline-block');
+					 $("#destination" ).after("<span id=\"loader\"></span>");
 				 },
 				 url: "/cityInformationByQuery/" + request.term,
 				 dataType: "json",
@@ -20,7 +24,7 @@ $(document).ready(function () {
 							 hiddenValue: item.value
 						 }
 					 },
-					 $("#loader").css('display','none')
+					 $("#loader").remove()
 					 ));
 				 	}
 			 	});

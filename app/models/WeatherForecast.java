@@ -14,7 +14,7 @@ public class WeatherForecast {
 		List<WeatherData> wd = new ArrayList<WeatherData>();
 		String jsonStr;
 		try {
-			jsonStr = Core.readUrl("http://api.openweathermap.org/data/2.5/forecast?lat=" + Lat + "&lon=" + Long + "&units=metric&cnt=14");
+			jsonStr = Core.readUrl("http://api.openweathermap.org/data/2.5/forecast?lat=" + Lat + "&lon=" + Long + "&units=metric&cnt=99&APPID=17e9b1943573dd116a68f2382d48676c");
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode actualObj = mapper.readTree(jsonStr);
 			JsonNode results = actualObj.get("list");

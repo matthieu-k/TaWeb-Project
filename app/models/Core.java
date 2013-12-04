@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
@@ -57,8 +56,9 @@ public class Core {
 								+ "?r rdfs:label ?nomCity . "
 								+ "?r dbpedia-owl:country ?countryResource . "
 								+ "?countryResource rdfs:label ?nomCountry . "
-								+ "FILTER (lang(?nomCity) = \"en\" && lang(?nomCountry) = \"en\" && regex(str(?nomCity), \""+ query +"\", \"i\")) "
-								+ "OPTIONAL { ?r dbpedia-owl:department ?depResource . ?depResource rdfs:label ?nomDep . FILTER (lang(?nomDep) = \"en\") } "
+								+ "FILTER (lang(?nomCity) = \"en\" && lang(?nomCountry) = \"en\" && regex(str(?nomCity), \"^"+ query +"\", \"i\")) "
+								+ "OPTIONAL {?r dbpedia-owl:department ?depResource . ?depResource rdfs:label ?nomDep . FILTER (lang(?nomDep) = \"en\") } "
+								+ "OPTIONAL {?r dbpedia-owl:populationTotal ?pop } "
 								+ "} "
 								+ "UNION "
 								+ "{ "
@@ -66,10 +66,12 @@ public class Core {
 								+ "?r rdfs:label ?nomCity . "
 								+ "?r dbpedia-owl:country ?countryResource . "
 								+ "?countryResource rdfs:label ?nomCountry . "
-								+ "FILTER (lang(?nomCity) = \"en\" && lang(?nomCountry) = \"en\" && regex(str(?nomCity), \""+ query +"\", \"i\")) "
-								+ "OPTIONAL { ?r dbpedia-owl:department ?depResource . ?depResource rdfs:label ?nomDep . FILTER (lang(?nomDep) = \"en\") } "
+								+ "FILTER (lang(?nomCity) = \"en\" && lang(?nomCountry) = \"en\" && regex(str(?nomCity), \"^"+ query +"\", \"i\")) "
+								+ "OPTIONAL {?r dbpedia-owl:department ?depResource . ?depResource rdfs:label ?nomDep . FILTER (lang(?nomDep) = \"en\") } "
+								+ "OPTIONAL {?r dbpedia-owl:populationTotal ?pop } "
 								+ "} "
 								+ "} "
+								+ "ORDER BY DESC(?pop) "
 								+ "LIMIT 10";
 		
 		QueryExecution qexec = QueryExecutionFactory.sparqlService(service_ep, queryString);
@@ -92,11 +94,12 @@ public class Core {
 		    	Literal resultDepartmentName = qsolution.getLiteral("nomDep");
 		    	departmentName = resultDepartmentName.getString();
 		    }
-	    	
+
 		    Literal resultCountryName = qsolution.getLiteral("nomCountry");
 		    String countryName = resultCountryName.getString();
 		    
 		    if(departmentName != "") departmentNameStr = departmentName + ", ";
+
 		    
 		    resultsStr += "{\"value\" : \"" + cityName + "\",";
 		    resultsStr += "\"name\" : \"" + cityName + ", " + departmentNameStr + countryName + "\"}";
@@ -107,28 +110,5 @@ public class Core {
 		resultsStr += "]}";
 
 		return resultsStr;
-	}
-	
-	public static String findCityAndCountryByIATACode(String IATACode) {
-		String jsonStr = null;
-		String cityName = null, countryName = null;
-		try {
-			jsonStr = Files.toString(new File(Play.application().resource("public/json/city_airport_codes.json").toURI()), Charsets.UTF_8);
-			ObjectMapper mapper = new ObjectMapper();
-			JsonNode actualObj = mapper.readTree(jsonStr);
-			for (JsonNode jsonNode : actualObj) {
-				if (jsonNode.get("iata_code").textValue().equals(IATACode)) {
-					cityName = jsonNode.get("city").textValue();
-					countryName = jsonNode.get("country").textValue();
-				}
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return cityName.concat(", " + countryName);
 	}
 }
