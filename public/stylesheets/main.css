@@ -1,8 +1,59 @@
-#airport-date-form label {
+body {
+	font: 13px "Trebuchet MS",Helvetica,Jamrul,sans-serif;
+}
+h1 {
+	font-size: 26px;
+	padding: 10px 0 5px;
+}
+p {
+	padding: 4px 0;
+}
+header {
+	height: 150px;
+}
+.center {
+	text-align: center;
+}
+#wrapper {
+	margin: 0 auto;
+	width: 960px;
+}
+#destination-date-form p {
+	margin: 15px 0;
+}
+#destination-date-form label {
 	display : inline-block;
 	width : 150px;
 }
 
-#airport-date-form #iataCode, #airport-date-form #country {
-	width : 400px;
+#destination-date-form #destination, #destination-date-form #date {
+	width : 450px;
+}
+#loader {
+	display: none;
+	width: 16px;
+	height: 16px;
+	margin: 0 0 0 5px;
+    background-image: url(../images/ui-anim_basic_16x16.gif);
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+input.blue, textarea.blue {
+    background: linear-gradient(to bottom, #f7f7f8 0%,#ffffff 100%);
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset, 0 -1px 0 rgba(0,0,0,0.05) inset;
+    transition: all 0.2s linear;
+    font-size: 13px;
+    color: #222222;
+    position: relative;
+    height: 28px;
+    padding-left: 12px;
+}
+textarea.blue {
+    padding: 12px;
+}
+input.blue:focus, textarea.blue:focus {
+    box-shadow: 0 1px 0 #2392F3 inset, 0 -1px 0 #2392F3 inset, 1px 0 0 #2392F3 inset, -1px 0 0 #2392F3 inset, 0 0 4px rgba(35,146,243,0.5);
+    outline: none;
 }

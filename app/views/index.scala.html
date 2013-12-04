@@ -1,24 +1,21 @@
 @main("TaWeb Project") {
 
     <div id="index">
-	<h1>TaWeb Project</h1>
-	
-	<form id="airport-date-form" method="post" action="@routes.Application.results()">
-		<label for="iataCode">Country : </label>
-		<select id="country" name="country"></select><br/>
-		
-		<label for="iataCode">Destination : </label>
-		<select id="iataCode" name="iataCode"></select>
-		<img id="loading-airports-img" src="/assets/images/loading.gif" alt="loading"/><br/>
-		
-		<label for="arrivalDateTime">Arrival date : </label>
-		<input id="arrivalDateTime" type="text" name="arrivalDateTime" placeholder="dd/mm/yyyy hh:mm"/><br/>
-		
-		<input type="submit" />
+	<h1>Select your destination and arrival date</h1>
+	<form id="destination-date-form" method="post" action="@routes.Application.results()">
+        <p>
+            <label for="destination">Destination : </label>
+            <input id="destination" class="blue" name="destination">
+            <span id="loader"></span>
+            <input type="hidden" id="destinationValue">
+        </p>
+		<p>
+            <label for="arrivalDateTime">Arrival date : </label>
+            <input id="arrivalDateTime" type="text" name="arrivalDateTime" placeholder="dd/mm/yyyy hh:mm" class="blue"><br/>
+		</p>
+		<p class="center">
+            <input type="submit" value=" Go " />
+        </p>
 	</form>
-	
-	<script src="/assets/javascripts/countries.js"></script>
-	<script src="/assets/javascripts/airports.js"></script>
-	
 	</div>
 }

@@ -17,7 +17,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 import views.html.results;
-import views.html.airportInformationByCountry;
+import views.html.cityInformationByQuery;
 
 public class Application extends Controller {
 	
@@ -26,27 +26,25 @@ public class Application extends Controller {
         			index.render()
     			);
     }
-    
-    public static Result GetAirportInformationByCountry(String country) {
-    	return ok(
-    				airportInformationByCountry.render(
-    							AirportService.GetAirportInformationByCountry(country)
-    						)
-				);
+
+    public static Result cityInformationByQuery(String query) {
+    	return ok(cityInformationByQuery.render(Core.getCityByQuery(query)));
     }
     
     public static Result results() throws ParseException {
     	DynamicForm dynamicForm = Form.form().bindFromRequest();
-        String iataCode = dynamicForm.get("iataCode");
+        String destination = dynamicForm.get("destinationValue");
         String arrivalDateTimeStr = dynamicForm.get("arrivalDateTime");
         Date ArrivalDate = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(arrivalDateTimeStr);
 
         // GETTING CITY DATA
-        System.out.println(iataCode);
-        City city = CityParser.getCityInfoByIataCode(iataCode);
+        System.out.println(destination);
+        City city = CityParser.getCityInfoByIataCode(destination);
         
         // GET WEATHER INFORMATION
         List<WeatherData> weatherData = WeatherForecast.getWeatherByLatLongOnDate(43.61, 3.87, ArrivalDate);
+        
+        // GET CURRENCY INFORMATION
 
     	return ok(results.render(city, ArrivalDate, weatherData));
     }

@@ -4,7 +4,7 @@
 
 # Home page
 GET     /                           					controllers.Application.index()
-GET 	/GetAirportInformationByCountry/:country		controllers.Application.GetAirportInformationByCountry(country : String)
+GET     /cityInformationByQuery/:query                  controllers.Application.cityInformationByQuery(query : String)
 POST    /results                   		 				controllers.Application.results()
 
 # Map static resources from the /public folder to the /assets URL path
