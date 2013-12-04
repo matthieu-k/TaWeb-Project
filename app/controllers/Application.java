@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import models.AirportService;
 import models.Core;
 import models.WeatherData;
 import models.WeatherForecast;
@@ -19,33 +18,34 @@ import views.html.index;
 import views.html.results;
 import views.html.cityInformationByQuery;
 
-public class Application extends Controller {
-	
-    public static Result index() {
-        return ok(
-        			index.render()
-    			);
+public class Application extends Controller 
+{
+    public static Result index() 
+    {
+        return ok( index.render() );
     }
 
-    public static Result cityInformationByQuery(String query) {
+    public static Result cityInformationByQuery(String query) 
+    {
     	return ok(cityInformationByQuery.render(Core.getCityByQuery(query)));
     }
     
-    public static Result results() throws ParseException {
+    public static Result results() throws ParseException 
+    {
+    	// GET FORM DATA
     	DynamicForm dynamicForm = Form.form().bindFromRequest();
-        String destination = dynamicForm.get("destinationValue");
+        
+    	String destination = dynamicForm.get("destinationValue");
         String arrivalDateTimeStr = dynamicForm.get("arrivalDateTime");
         Date ArrivalDate = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(arrivalDateTimeStr);
 
-        // GETTING CITY DATA
+        // GET CITY DATA
         System.out.println(destination);
-        City city = CityParser.getCityInfoByIataCode(destination);
+        City city = CityParser.parse("Montpellier");
         
         // GET WEATHER INFORMATION
-        List<WeatherData> weatherData = WeatherForecast.getWeatherByLatLongOnDate(43.61, 3.87, ArrivalDate);
+        List<WeatherData> weatherData = WeatherForecast.getWeatherByLatLongOnDate(city.getLatitude(),city.getLongitude(), ArrivalDate);
         
-        // GET CURRENCY INFORMATION
-
     	return ok(results.render(city, ArrivalDate, weatherData));
     }
 }
