@@ -17,6 +17,7 @@ h2 strong {
 h3 {
 	font-size: 18px;
 	font-weight: normal;
+	margin: 25px 0 5px 0;
 }
 p {
     padding: 4px 0;
@@ -27,6 +28,25 @@ header {
 }
 .center {
     text-align: center;
+}
+.left {
+	position: relative;
+	float: left;
+}
+.right {
+	position: relative;
+	float: right;
+}
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+}
+.clearfix {
+    zoom:1;
 }
 #nav {
 	background: #2492d8;
@@ -111,4 +131,39 @@ input.blue:focus, textarea.blue:focus {
 }
 #error-message {
 	color: #db2525;
+}
+#results .left {
+	width: 450px;
+}
+#results .right {
+    width: 430px;
+}
+#weather-info {
+	width: 100%;
+}
+#weather-info th
+{
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
+    line-height: 30px;
+}
+#weather-info td
+{
+    border-bottom: 1px solid #ccc;
+    vertical-align: baseline;
+    padding: 0 0 25px 10px;
+}
+#weather-info td.img {
+	padding: 0 0 0 10px;
+}
+#weather-info td img {
+    position: relative;
+    top: 20px;
+}
+#map-canvas {
+	margin: 10px 0 0 0;
+	width: 430px;
+	height: 430px;
 }

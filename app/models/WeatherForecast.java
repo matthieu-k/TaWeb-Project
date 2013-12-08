@@ -16,7 +16,6 @@ public class WeatherForecast {
 		List<WeatherData> wd = new ArrayList<WeatherData>();
 		String jsonStr;
 		try {
-			System.out.println(Play.application().configuration().getString("OWMAPPID"));
 			jsonStr = Core.readUrl("http://api.openweathermap.org/data/2.5/forecast?lat=" + Lat + "&lon=" + Long + "&units=metric&cnt=99&APPID="+Play.application().configuration().getString("OWMAPPID"));
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode actualObj = mapper.readTree(jsonStr);

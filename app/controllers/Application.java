@@ -16,6 +16,7 @@ import models.WeatherForecast;
 import models.city.City;
 import models.city.CityParser;
 import models.endpoint.SparqlEndpoint;
+import play.Play;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
@@ -66,7 +67,10 @@ public class Application extends Controller
         // GET CURRENCY INFORMATION
         String currency = CurrencyService.getCurrency(city.getCurrencyCode());
         
-    	return ok(results.render(city, ArrivalDate, weatherData, currency));
+        // GET GOOGLE MAP API KEY
+        String GMAPIKEY = Play.application().configuration().getString("GMAPIKEY");
+        
+    	return ok(results.render(city, ArrivalDate, weatherData, currency, GMAPIKEY));
     }
     
     public static Result sparql() 

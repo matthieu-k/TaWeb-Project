@@ -68,7 +68,7 @@ public class QueryRunner
 		    city.setLogitude(cityLong);
 		    city.setPopulationTotal(cityPopulationTotal);
 		    city.setCountry(countryName);
-		    // Remove additional information
+		    // Remove additional information on currency
 		    if(currencyCode.indexOf(",") >= 0) {
 				StringTokenizer st = new StringTokenizer(currencyCode, ",");
 				currencyCode = st.nextToken();

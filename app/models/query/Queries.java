@@ -21,7 +21,7 @@ public class Queries
 			"   ?cityResource rdf:type dbpedia-owl:City. "+			
 			"   ?cityResource rdfs:label \"%s\"@en."+
 			"   ?cityResource geo:lat ?cityLat."+
-			"   ?cityResource geo:lat ?cityLong."+
+			"   ?cityResource geo:long ?cityLong."+
 			"   ?cityResource dbpedia-owl:abstract ?cityAbstract."+
 			"   ?cityResource dbpedia-owl:populationTotal ?cityPopulationTotal."+
 			
@@ -38,7 +38,7 @@ public class Queries
 			"   ?cityResource rdf:type dbpedia-owl:City. "+			
 			"   ?cityResource rdfs:label \"%s\"@en."+
 			"   ?cityResource geo:lat ?cityLat."+
-			"   ?cityResource geo:lat ?cityLong."+
+			"   ?cityResource geo:long ?cityLong."+
 			"   ?cityResource dbpedia-owl:abstract ?cityAbstract."+
 			"   ?cityResource dbpedia-owl:populationTotal ?cityPopulationTotal."+
 			
@@ -58,7 +58,7 @@ public class Queries
 			"   ?cityResource rdf:type dbpedia-owl:Settlement. "+			
 			"   ?cityResource rdfs:label \"%s\"@en."+
 			"   ?cityResource geo:lat ?cityLat."+
-			"   ?cityResource geo:lat ?cityLong."+
+			"   ?cityResource geo:long ?cityLong."+
 			"   ?cityResource dbpedia-owl:abstract ?cityAbstract."+
 			"   ?cityResource dbpedia-owl:populationTotal ?cityPopulationTotal."+
 			
@@ -75,7 +75,7 @@ public class Queries
 			"   ?cityResource rdf:type dbpedia-owl:Settlement. "+			
 			"   ?cityResource rdfs:label \"%s\"@en."+
 			"   ?cityResource geo:lat ?cityLat."+
-			"   ?cityResource geo:lat ?cityLong."+
+			"   ?cityResource geo:long ?cityLong."+
 			"   ?cityResource dbpedia-owl:abstract ?cityAbstract."+
 			"   ?cityResource dbpedia-owl:populationTotal ?cityPopulationTotal."+
 			

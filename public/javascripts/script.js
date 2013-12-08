@@ -25,8 +25,8 @@ $(document).ready(function () {
 							 value: item.name,
 							 hiddenValue: item.value
 						 }
-					 }//,
-					 //$("#loader").remove()
+					 },
+					 $("#loader").remove()
 					 ));
 				 	}
 			 	});
