@@ -1,26 +1,28 @@
 @main("TaWeb Project") {
 
     <div id="index">
-    <h1>Select your destination and arrival date</h1>
-    <form id="destination-date-form" method="post" action="@routes.Application.results()">
-        <p>
-            <label for="destination">Destination</label>
-            <input id="destination" class="blue" name="destination">
-            <input type="hidden" id="destinationValue" name="destinationValue">
-        </p>
-        <p>
-            <span>
-                <label for="arrivalDate">Arrival date</label>
-                <input id="arrivalDate" type="text" name="arrivalDate" placeholder="dd/mm/yyy" class="blue">
-            </span>
-            <span>
-                <label for="arrivalTime">Arrival time (optional)</label>
-                <input id="arrivalTime" type="text" name="arrivalTime" placeholder="hh:mm" class="blue"><br/>
-            </span>
-        </p>
-        <p class="center">
-            <input type="submit" value=" Go " />
-        </p>
-    </form>
+	    <div id="box">
+	    <h1>Select your destination and arrival date</h1>
+	    <form id="destination-date-form" method="post" action="@routes.Application.results()">
+	        <p>
+	            <label for="destination">Destination</label>
+	            <input id="destination" class="blue" name="destination">
+	            <input type="hidden" id="destinationValue" name="destinationValue">
+	        </p>
+	        <p>
+	            <span>
+	                <label for="arrivalDate">Arrival date</label>
+	                <input id="arrivalDate" type="text" name="arrivalDate" placeholder="dd/mm/yyy" class="blue">
+	            </span>
+	            <span>
+	                <label for="arrivalTime">Arrival time (optional)</label>
+	                <input id="arrivalTime" type="text" name="arrivalTime" placeholder="hh:mm" class="blue"><br/>
+	            </span>
+	        </p>
+	        <p class="center">
+	            <input type="submit" value=" Go " />
+	        </p>
+	    </form>
+	    </div>
     </div>
 }

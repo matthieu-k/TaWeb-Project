@@ -1,6 +1,6 @@
 body {
     font: 13px "Trebuchet MS",Helvetica,Jamrul,sans-serif;
-    background: #fff;
+    background: #fbfbfb;
 }
 h1 {
     font-size: 26px;
@@ -22,14 +22,45 @@ p {
     padding: 4px 0;
 }
 header {
-    height: 150px;
+    box-shadow: 0px 3px 1px 0px #999;
+    margin: 0 0 50px 0;
 }
 .center {
     text-align: center;
 }
+#nav {
+	background: #2492d8;
+}
+nav {
+	display: table;
+    width: 560px;
+    margin: 0 auto;
+}
+nav a {
+	color: #fff;
+	text-decoration: none;
+	display: table-cell;
+	text-align: center;
+	line-height: 40px;
+	font-size: 16px;
+}
+nav a:hover {
+	background: #1b78b3;
+}
 #wrapper {
     margin: 0 auto;
     width: 960px;
+}
+#header-inner {
+    margin: 0 auto;
+    width: 960px;
+    height: 100px;
+}
+#box {
+    background: #fff;
+    border: 1px solid #e1e0e0;
+    padding: 20px 25px;
+    border-radius: 3px;
 }
 #index {
     width: 734px;
@@ -42,21 +73,22 @@ header {
     display : inline-block;
     width : 150px;
 }
-
 #destination-date-form #destination, #destination-date-form #date {
     width : 492px;
 }
 #destination-date-form p span {
     margin-right: 50px;
 }
-#loader {
+#destination-date-form #loader {
     display: inline-block;
     width: 16px;
     height: 16px;
     margin: 0 0 0 5px;
-    background-image: url(../images/ui-anim_basic_16x16.gif);
-    background-position: right center;
-    background-repeat: no-repeat;
+    background: url(../images/ui-anim_basic_16x16.gif) right center no-repeat;
+}
+#spaqrl-form textarea {
+	width: 881px;
+	height: 180px;
 }
 input.blue, textarea.blue {
     background: linear-gradient(to bottom, #f7f7f8 0%,#ffffff 100%);
@@ -76,4 +108,7 @@ textarea.blue {
 input.blue:focus, textarea.blue:focus {
     box-shadow: 0 1px 0 #2392F3 inset, 0 -1px 0 #2392F3 inset, 1px 0 0 #2392F3 inset, -1px 0 0 #2392F3 inset, 0 0 4px rgba(35,146,243,0.5);
     outline: none;
+}
+#error-message {
+	color: #db2525;
 }

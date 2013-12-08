@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import play.Play;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -14,7 +16,8 @@ public class WeatherForecast {
 		List<WeatherData> wd = new ArrayList<WeatherData>();
 		String jsonStr;
 		try {
-			jsonStr = Core.readUrl("http://api.openweathermap.org/data/2.5/forecast?lat=" + Lat + "&lon=" + Long + "&units=metric&cnt=99&APPID=17e9b1943573dd116a68f2382d48676c");
+			System.out.println(Play.application().configuration().getString("OWMAPPID"));
+			jsonStr = Core.readUrl("http://api.openweathermap.org/data/2.5/forecast?lat=" + Lat + "&lon=" + Long + "&units=metric&cnt=99&APPID="+Play.application().configuration().getString("OWMAPPID"));
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode actualObj = mapper.readTree(jsonStr);
 			JsonNode results = actualObj.get("list");

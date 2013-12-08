@@ -1,0 +1,24 @@
+@main("TaWeb Project") {
+
+    <div id="sparql">
+        <div id="box">
+            <h1>SPARQL Endpoint</h1>
+            <form id="spaqrl-form" method="get" action="@routes.Application.sparqlresults()">
+                <p>
+                    <textarea name="query" class="blue">SELECT * WHERE { ?s ?p ?o } LIMIT 2</textarea>
+                </p>
+                <p>
+                    <select name="format">
+                        <option value="0">HTML</option>
+                        <option value="1">JSON</option>
+                        <option value="2">XML</option>
+                        <option value="3">RDF</option>
+                    </select>
+                </p>
+                <p class="center">
+                    <input type="submit" value=" Go " />
+                </p>
+            </form>
+        </div>
+    </div>
+}
