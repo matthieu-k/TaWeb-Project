@@ -1,28 +1,78 @@
 @main("TaWeb Project") {
 
-    <div id="index">
-	    <div id="box">
-	    <h1>Select your destination and arrival date</h1>
-	    <form id="destination-date-form" method="post" action="@routes.Application.results()">
-	        <p>
-	            <label for="destination">Destination</label>
-	            <input id="destination" class="blue" name="destination">
-	            <input type="hidden" id="destinationValue" name="destinationValue">
-	        </p>
-	        <p>
-	            <span>
-	                <label for="arrivalDate">Arrival date</label>
-	                <input id="arrivalDate" type="text" name="arrivalDate" placeholder="dd/mm/yyy" class="blue">
-	            </span>
-	            <span>
-	                <label for="arrivalTime">Arrival time (optional)</label>
-	                <input id="arrivalTime" type="text" name="arrivalTime" placeholder="hh:mm" class="blue"><br/>
-	            </span>
-	        </p>
-	        <p class="center">
-	            <input type="submit" value=" Go " />
-	        </p>
-	    </form>
-	    </div>
-    </div>
+<div id="current-container">
+	<!-- related content -->
+	<section class='about-slider' style="margin-bottom: 50px;margin-top: 50px;">
+	    <section class='container'>
+	    	<h1>Select your destination and arrival date</h1>
+	        <section class='row'>
+	            <div class='span9'>
+	                <div class='description-box open' rel='1'>
+	                    <div class='inner'>
+		                    <form id="destination-date-form" method="post" action="@routes.Application.results()">
+		                    	<input id="destination" name="destination" type="text" style="width: 450px;" placeholder="Destination City" />
+		                    	<input id="destinationValue" name="destinationValue" type="hidden"/>
+	                            <input id="arrivalDate" name="arrivalDate" type="text" style="width: 190px;" placeholder="dd / mm / yyyy"/>  
+	                            <input id="arrivalTime" name="arrivalTime" type="text" style="width: 50px;" placeholder="hh:mm" />
+	                            <br />
+	                            <button type="submit" class='btn btn-success btn-lg btn-block' style="size: 90px;">
+	                            	<i class="icon-search icon-white"> </i> Search
+	                            </button>
+	                        </form>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class='span3'>
+	                <div class='description-controls'>
+	                    <ul>
+	                        <li><a href="#" rel='1' class='active'>Home</a></li>
+	                        <li><a href="#" rel='2'>SPARQL EndPoint</a></li>
+	                        <li><a href="#" rel='3'>Ontology</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </section>
+	    </section>
+	</section>
+	
+	<section class='full-width'>
+	    <section class='container'>
+	        <section class='row'>
+	            <div class='span4'>
+	                <h2>Popular Destination</h2>
+	                <p>	Rdfdfdf sdfdfdfdfdferer er er er er er eret ereegrgd df er ete r erte e eyer.</p>
+	                <a href="#" class='read-more'>Learn More</a><br />
+	                <a href="#" class='read-more'>Some recommendations</a>
+	            </div>
+	            <div class='span4'>
+	                <ul class='big-numbers'>
+	                    <li>
+	                        <span class='number'>1.</span> <div class='text'>Rdfdfdf sdfdfdfdfdferer er er er er er eret ereegrgd df er ete r erte e eyer.</div>
+	                    </li>
+	                    <li>
+	                        <span class='number'>2.</span> <div class='text'>Rdfdfdf sdfdfdfdfdferer er er er er er eret ereegrgd df er ete r erte e eyer.</div>
+	                    </li>
+	                    <li>
+	                        <span class='number'>3.</span> <div class='text'>Rdfdfdf sdfdfdfdfdferer er er er er er eret ereegrgd df er ete r erte e eyer.</div>
+	                    </li>
+	                </ul>
+	            </div>
+	            <div class='span4'>
+	                <ul class='big-numbers'>
+	                    <li>
+	                        <span class='number'>4.</span> <div class='text'>Rdfdfdf sdfdfdfdfdferer er er er er er eret ereegrgd df er ete r erte e eyer.</div>
+	                    </li>
+	                    <li>
+	                        <span class='number'>5.</span> <div class='text'>Rdfdfdf sdfdfdfdfdferer er er er er er eret ereegrgd df er ete r erte e eyer.Proin congue arcu libero. Sed placerat, sapien eu imperdiet scelerisque, arcu diam eleifend lorem, non vestibulum.</div>
+	                    </li>
+	                    <li>
+	                        <span class='number'>6.</span> <div class='text'>Rdfdfdf sdfdfdfdfdferer er er er er er eret ereegrgd df er ete r erte e eyer.</div>
+	                    </li>
+	                </ul>
+	            </div>
+	            <i class='footer-bubble'> </i>
+	        </section>
+	    </section>
+	</section>	
+</div>
 }

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	if ($("#index").length) {
+	if ($("#current-container").length) {
 		$('#arrivalDate').datepicker({
 			dateFormat: "dd/mm/yy"
 		});

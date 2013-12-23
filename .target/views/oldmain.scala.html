@@ -1,0 +1,36 @@
+@(title: String, scripts: Html = Html(""))(content: Html)
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/css-reset.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/jquery-ui.css")">
+        
+        <script src="//code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
+        <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/jquery-ui-timepicker-addon.js")" type="text/javascript"></script>
+        @scripts
+        <script src="@routes.Assets.at("javascripts/script.js")" type="text/javascript"></script>
+    </head>
+    <body>
+		<header>
+            <div id="header-inner">
+            	Logo
+            </div>
+            <div id="nav">
+				<nav>
+		            <a href="@routes.Application.index()">Home</a>
+		            <a href="@routes.Application.sparql()">SPARQL Endpoint</a>
+		            <a href="#">Ontology</a>
+		            <a href="#">About</a>
+		        </nav>
+	        </div>
+		</header>
+        <div id="wrapper">
+            @content
+        </div>
+        <footer></footer>
+    </body>
+</html>
